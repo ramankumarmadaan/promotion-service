@@ -4,18 +4,10 @@ package com.wipro.promotionservice.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "Customer_Promotion")
-public class Customer {
+public class CustomerResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
-
-    @Column(unique = true)
     Integer customerId;
 
-    @Column
     String promotionCode;
 
     public String getPromotionCode() {
@@ -24,14 +16,6 @@ public class Customer {
 
     public void setPromotionCode(String promotionCode) {
         this.promotionCode = promotionCode;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getCustomerId() {

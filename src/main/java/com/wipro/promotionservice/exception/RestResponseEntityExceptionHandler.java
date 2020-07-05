@@ -14,6 +14,9 @@ public class RestResponseEntityExceptionHandler
     private static ErrorError CUSTOMER_NOT_FOUND = new ErrorError(new Error(
             "Customer not found With id", HttpStatus.NOT_FOUND));
 
+    private static ErrorError PRODUCT_NOT_FOUND = new ErrorError(new Error(
+            "Product not found With id", HttpStatus.NOT_FOUND));
+
     private static ErrorError RUNTIME_MESSAGE = new ErrorError(new Error(
             "There is some issue with the request", HttpStatus.BAD_REQUEST));
 
@@ -21,8 +24,13 @@ public class RestResponseEntityExceptionHandler
     @ExceptionHandler(value = CustomerNotFoundException.class)
     protected ResponseEntity<Object> handleCustomerDataNotFound(
             CustomerNotFoundException ex) {
-        CUSTOMER_NOT_FOUND.getError().setMessage(ex.getMessage());
         return new ResponseEntity<>(CUSTOMER_NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = ProductNotFoundException.class)
+    protected ResponseEntity<Object> handleProductDataNotFound(
+            ProductNotFoundException ex) {
+        return new ResponseEntity<>(PRODUCT_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = RuntimeException.class)

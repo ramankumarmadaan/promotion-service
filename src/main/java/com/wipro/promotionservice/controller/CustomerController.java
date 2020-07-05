@@ -1,6 +1,7 @@
 package com.wipro.promotionservice.controller;
 
 import com.wipro.promotionservice.entity.Customer;
+import com.wipro.promotionservice.entity.CustomerResponse;
 import com.wipro.promotionservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -14,39 +15,32 @@ public class CustomerController {
     CustomerService customerService;
 
     @GetMapping("/promotion/customer/{customerId}")
-    public Customer getPromotionByCustomerId(@PathVariable int customerId){
-
+    @ResponseStatus(value= HttpStatus.OK)
+    public CustomerResponse getPromotionByCustomerId(@PathVariable int customerId){
         return customerService.getPromotionByCustomerId(customerId);
     }
 
-    @PostMapping("/promotion/customer")
+    @PostMapping("/promotion/customer/updateCustomer")
     @ResponseStatus(value= HttpStatus.ACCEPTED)
-    public void addPromotionToCustomerId(@RequestBody Customer customer){
-
+    public void updateCustomer(@RequestBody Customer customer){
         customerService.addPromotionToCustomerByCustomerId(customer);
-
     }
 
-    @PostMapping("/promotion/newCustomer")
-    @ResponseStatus(value= HttpStatus.ACCEPTED)
+    @PostMapping("/promotion/customer/addCustomer")
+    @ResponseStatus(value= HttpStatus.CREATED)
     public void addNewCustomer(@RequestBody Customer customer){
-
         customerService.addNewCustomer(customer);
-
     }
 
-    @PostMapping("/promotion/appliedPromotionCode")
-    @ResponseStatus(value= HttpStatus.ACCEPTED)
-    public void updateAppliedPromotionCode(@RequestBody Customer customer){
-
+    @PostMapping("/promotion/customer/deletePromotionCode")
+    @ResponseStatus(value= HttpStatus.NO_CONTENT)
+    public void deletePromotionCode(@RequestBody Customer customer){
         customerService.updateNewCustomer(customer);
-
     }
 
     @DeleteMapping("/promotion/customer/{customerId}")
+    @ResponseStatus(value= HttpStatus.NO_CONTENT)
     public void deleteCustomerById(@PathVariable int customerId){
-
         customerService.deleteCustomerbyId(customerId);
-
     }
 }

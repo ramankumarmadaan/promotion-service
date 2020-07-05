@@ -1,4 +1,4 @@
-package com.wipro.promotionservice.controller;
+package com.wipro.promotionservice.configuration;
 
 
 import org.springframework.context.annotation.Bean;

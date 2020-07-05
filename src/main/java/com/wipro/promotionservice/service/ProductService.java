@@ -1,10 +1,11 @@
 package com.wipro.promotionservice.service;
 
 import com.wipro.promotionservice.entity.Product;
+import com.wipro.promotionservice.entity.ProductResponse;
 
 public interface ProductService {
 
-  Product getPromotionByProductId(int id);
+  ProductResponse getPromotionByProductId(int id);
 
   void addPromotionToProductByProductId(Product product);
 

@@ -1,29 +1,13 @@
 package com.wipro.promotionservice.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "Product_Promotion")
-public class Product {
+public class ProductResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
-
-    @Column(unique = true)
     Integer productId;
 
-    @Column
     String promotionCode;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getProductId() {
         return productId;

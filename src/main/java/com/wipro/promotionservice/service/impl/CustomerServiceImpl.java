@@ -1,9 +1,11 @@
 package com.wipro.promotionservice.service.impl;
 
 import com.wipro.promotionservice.entity.Customer;
+import com.wipro.promotionservice.entity.CustomerResponse;
 import com.wipro.promotionservice.exception.CustomerNotFoundException;
 import com.wipro.promotionservice.repository.CustomerRepository;
 import com.wipro.promotionservice.service.CustomerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,13 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public Customer getPromotionByCustomerId(int id) {
-        return customerRepository.findByCustomerId(id);
+    public CustomerResponse getPromotionByCustomerId(int id) {
+        Customer customer = customerRepository.findByCustomerId(id);
+        if(null == customer) {
+            throw new CustomerNotFoundException("Customer Not Found with CustomerId");
+        }
+            ModelMapper model = new ModelMapper();
+            return model.map(customer, CustomerResponse.class) ;
 
     }
 
@@ -30,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void addPromotionToCustomerByCustomerId(Customer customer) {
         Customer retrievedCustomer = customerRepository.findByCustomerId(customer.getCustomerId());
         if(null == retrievedCustomer) {
-            throw new CustomerNotFoundException("Customer Not Found with CustomerId:"+ customer.getCustomerId());
+            throw new CustomerNotFoundException("Customer Not Found with CustomerId");
         }
         retrievedCustomer.setPromotionCode(customer.getPromotionCode());
         customerRepository.save(retrievedCustomer);
@@ -41,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateNewCustomer(Customer customer) {
         Customer retrievedCustomer = customerRepository.findByCustomerId(customer.getCustomerId());
         if(null == retrievedCustomer) {
-            throw new CustomerNotFoundException("Customer Not Found with CustomerId:"+ customer.getCustomerId());
+            throw new CustomerNotFoundException("Customer Not Found with CustomerId");
         }
         retrievedCustomer.setPromotionCode("");
         customerRepository.save(retrievedCustomer);

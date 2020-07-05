@@ -1,10 +1,11 @@
 package com.wipro.promotionservice.service;
 
 import com.wipro.promotionservice.entity.Customer;
+import com.wipro.promotionservice.entity.CustomerResponse;
 
 public interface CustomerService {
 
-    Customer getPromotionByCustomerId(int id);
+    CustomerResponse getPromotionByCustomerId(int id);
 
     void addPromotionToCustomerByCustomerId(Customer customer);
 
