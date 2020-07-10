@@ -1,7 +1,5 @@
 package com.wipro.promotionservice.entity;
 
-import javax.persistence.*;
-
 public class ProductResponse {
 
     Integer productId;

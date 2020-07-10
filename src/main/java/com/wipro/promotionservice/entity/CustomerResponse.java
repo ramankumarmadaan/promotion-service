@@ -1,9 +1,5 @@
 package com.wipro.promotionservice.entity;
 
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
 public class CustomerResponse {
 
     Integer customerId;
